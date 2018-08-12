@@ -1,33 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { SelectionModel } from '@angular/cdk/collections';
+import { slideUpDown } from './app.animations';
+import { COUNTRIES } from './app.countries';
 import * as _ from 'lodash';
 
 export interface Country {
     code: string;
     name: string;
 }
-const COUNTRIES = [
-    {
-        code: 'GB',
-        name: 'United Kingdom'
-    },
-    {
-        code: 'FR',
-        name: 'France'
-    },
-    {
-        code: 'DE',
-        name: 'Germany'
-    },
-    {
-        code: 'CH',
-        name: 'Switzerland'
-    }
-];
+
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
-    styleUrls: ['./app.component.scss']
+    styleUrls: ['./app.component.scss'],
+    animations: [ slideUpDown ]
 })
 export class AppComponent implements OnInit {
 

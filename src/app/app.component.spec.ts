@@ -1,8 +1,8 @@
 import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
-import { FilterPipe } from './filter.pipe';
+import { FilterPipe } from './app.pipes';
 import { MatButtonModule, MatMenuModule } from '@angular/material';
-import { FormsModule } from '../../node_modules/@angular/forms';
+import { FormsModule } from '@angular/forms';
 describe('AppComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({

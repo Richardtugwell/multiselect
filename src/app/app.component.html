@@ -1,19 +1,32 @@
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
-    crossorigin="anonymous">
-<button mat-raised-button color="primary" [matMenuTriggerFor]="menu">Menu {{selectedNames}}</button>
-<mat-menu #menu="matMenu">
-<button mat-button (click)="selectedCountries.clear();$event.stopPropagation()">deselect all</button>
-<button mat-button (click)="selectAll();$event.stopPropagation()">select all</button>
+<div class="wrapper">
+    <div>
+        <button (click)="showMenu=!showMenu">Select Countries
+            <i class="fas" [ngClass]="showMenu ? 'fa-chevron-up': 'fa-chevron-down'"> </i>
+        </button>
+        <div class="select__wrapper">
+            <div *ngIf="showMenu" @slideUpDown>
+                <button (click)="selectedCountries.clear()">deselect all</button>
+                <button (click)="selectAll();">select all</button>
+                <form #form="ngForm">
+                    <input type="text" placeholder="Search" id="search" ngModel name="search">
+                </form>
 
-    <form #form="ngForm">
-        <input type="text" placeholder="Search" id="search" ngModel name="search" (click)="$event.stopPropagation();">
-    </form>
-
-    <div *ngFor="let item of selectedCountries.selected" (click)="$event.stopPropagation();">
-        <span class="select__item far" (click)="selectedCountries.toggle(item);$event.stopPropagation();" [ngClass]="{ 'fa-check-square': selectedCountries.isSelected(item)}"> {{item.name}}</span>
+                <div class="select__items-wrapper">
+                <div *ngFor="let item of selectedCountries.selected">
+                    <span class="select__item far" (click)="selectedCountries.toggle(item)" [ngClass]="{ 'fa-check-square': selectedCountries.isSelected(item)}">
+                    {{item.name}}</span>
+                </div>
+                <hr *ngIf="!selectedCountries.isEmpty() && availableCountries.length" />
+                <div *ngFor="let item of availableCountries | filter:form.value.search">
+                    <span class="select__item far fa-square" (click)="selectedCountries.toggle(item)"> {{item.name}} </span>
+                </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <hr *ngIf="!selectedCountries.isEmpty() && availableCountries.length" />
-    <div *ngFor="let item of availableCountries | filter:form.value.search" (click)="$event.stopPropagation();">
-        <span class="select__item far fa-square" (click)="selectedCountries.toggle(item);$event.stopPropagation();"> {{item.name}}</span>
+    <div class="content__wrapper">
+        <span *ngFor="let item of selectedCountries.selected">
+            <button (click)="selectedCountries.deselect(item)">{{item.name}} <i class="fa fa-trash"></i></button>
+        </span>
     </div>
-</mat-menu>
+</div>

@@ -1,5 +1,25 @@
 .select {
+    &__wrapper {
+        overflow: hidden;
+        padding: 10px 0 0 0;
+        height: 100%;
+        width: 200px;
+    }
     &__item {
         cursor: pointer;
+        padding: 10px 0 0 0;
+    }
+    &__items-wrapper {
+        height: 400px;
+        overflow: scroll;
     }
 }
+.content {
+    &__wrapper span {
+        padding: 8px;
+    }
+}
+.wrapper {
+    display: flex;
+}
+button { cursor: pointer;}
