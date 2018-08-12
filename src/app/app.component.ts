@@ -13,7 +13,7 @@ export interface Country {
     selector: 'app-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss'],
-    animations: [ slideUpDown ]
+    animations: [slideUpDown]
 })
 export class AppComponent implements OnInit {
 
@@ -24,18 +24,25 @@ export class AppComponent implements OnInit {
     search = '';
 
     constructor() {
-    }
+}
 
     ngOnInit() {
         this.countries = COUNTRIES;
         this.availableCountries = _.difference(this.countries, this.selectedCountries.selected);
-        this.selectedCountries.onChange.subscribe( () => {
-            this.selectedNames = this.selectedCountries.selected.map( item => item.name );
+        this.selectedCountries.onChange.subscribe(() => {
+            this.selectedNames = this.selectedCountries.selected.map(item => item.name);
             this.availableCountries = _.difference(this.countries, this.selectedCountries.selected);
+            // It shoudn't necessarily be the responsibility here to sort the selectionModel ....
+            this.selectedCountries.sort( this.sortByName );
         });
     }
 
     selectAll() {
-        this.availableCountries.forEach( item =>  this.selectedCountries.select(item) );
+        this.availableCountries.forEach(item => this.selectedCountries.select(item));
     }
+
+    sortByName = (a: any, b: any): number => {
+        return a.name.toUpperCase() < b.name.toUpperCase() ? -1 : 1;
+    }
+
 }

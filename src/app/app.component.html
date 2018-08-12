@@ -1,32 +1,37 @@
 <div class="wrapper">
     <div>
-        <button (click)="showMenu=!showMenu">Select Countries
+        <div class="c-trigger" (click)="showMenu=!showMenu">
+            <span>Select Countries ({{selectedCountries.selected.length}})</span>
             <i class="fas" [ngClass]="showMenu ? 'fa-chevron-up': 'fa-chevron-down'"> </i>
-        </button>
-        <div class="select__wrapper">
-            <div *ngIf="showMenu" @slideUpDown>
-                <button (click)="selectedCountries.clear()">deselect all</button>
-                <button (click)="selectAll();">select all</button>
+        </div>
+        <div class="c-select">
+            <div class="c-select__wrapper" *ngIf="showMenu" @slideUpDown>
+                <button (click)="selectedCountries.clear()">None</button>
+                <button (click)="selectAll();">All</button>
+                <button (click)="showMenu=false">Close</button>
                 <form #form="ngForm">
                     <input type="text" placeholder="Search" id="search" ngModel name="search">
                 </form>
-
-                <div class="select__items-wrapper">
-                <div *ngFor="let item of selectedCountries.selected">
-                    <span class="select__item far" (click)="selectedCountries.toggle(item)" [ngClass]="{ 'fa-check-square': selectedCountries.isSelected(item)}">
-                    {{item.name}}</span>
-                </div>
-                <hr *ngIf="!selectedCountries.isEmpty() && availableCountries.length" />
-                <div *ngFor="let item of availableCountries | filter:form.value.search">
-                    <span class="select__item far fa-square" (click)="selectedCountries.toggle(item)"> {{item.name}} </span>
-                </div>
+                <div class="c-select__items-wrapper">
+                    <div class="c-select__selected" *ngIf="selectedCountries.hasValue()">
+                        <div *ngFor="let item of selectedCountries.selected">
+                            <span class="c-select__item far fa-check-square" (click)="selectedCountries.toggle(item)">
+                                {{item.name}}
+                            </span>
+                        </div>
+                    </div>
+                    <div *ngFor="let item of availableCountries | filter:form.value.search">
+                        <span class="c-select__item far fa-square" (click)="selectedCountries.toggle(item)">
+                            {{item.name}}
+                        </span>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="content__wrapper">
-        <span *ngFor="let item of selectedCountries.selected">
-            <button (click)="selectedCountries.deselect(item)">{{item.name}} <i class="fa fa-trash"></i></button>
-        </span>
+    <div class="content-wrapper">
+        <div @slideUpDown class="content-wrapper__item" *ngFor="let item of selectedCountries.selected" (click)="selectedCountries.deselect(item)">
+            {{item.name}} <i class="fa fa-trash"></i>
+        </div>
     </div>
 </div>
