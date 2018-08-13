@@ -14,13 +14,13 @@
                 </form>
                 <div class="c-select__items-wrapper">
                     <div class="c-select__selected" *ngIf="selectedCountries.hasValue()">
-                        <div *ngFor="let item of selectedCountries.selected">
+                        <div @disappear *ngFor="let item of selectedCountries.selected">
                             <span class="c-select__item far fa-check-square" (click)="selectedCountries.toggle(item)">
                                 {{item.name}}
                             </span>
                         </div>
                     </div>
-                    <div *ngFor="let item of availableCountries | filter:form.value.search">
+                    <div @disappear *ngFor="let item of availableCountries | filter:form.value.search">
                         <span class="c-select__item far fa-square" (click)="selectedCountries.toggle(item)">
                             {{item.name}}
                         </span>
@@ -30,7 +30,7 @@
         </div>
     </div>
     <div class="content-wrapper">
-        <div @slideUpDown class="content-wrapper__item" *ngFor="let item of selectedCountries.selected" (click)="selectedCountries.deselect(item)">
+        <div @disappear class="content-wrapper__item" *ngFor="let item of selectedCountries.selected" (click)="selectedCountries.deselect(item)">
             {{item.name}} <i class="fa fa-trash"></i>
         </div>
     </div>

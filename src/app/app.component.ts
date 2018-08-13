@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SelectionModel } from '@angular/cdk/collections';
-import { slideUpDown } from './app.animations';
+import { slideUpDown, disappear } from './app.animations';
 import { COUNTRIES } from './app.countries';
 import * as _ from 'lodash';
 
@@ -13,7 +13,7 @@ export interface Country {
     selector: 'app-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss'],
-    animations: [slideUpDown]
+    animations: [slideUpDown, disappear]
 })
 export class AppComponent implements OnInit {
 

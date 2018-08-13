@@ -19,3 +19,17 @@ export const slideUpDown = trigger('slideUpDown', [
         )
     ])
 ]);
+export const disappear = trigger('disappear', [
+    transition(':enter', [
+        style({ transform: 'scale(0)' }),  // initial
+        animate('.5s ease-in-out',
+            style({ transform: 'scale(1)' })  // final
+        )
+    ]),
+    transition(':leave', [
+        style({ transform: 'scale(1)' }),  // initial
+        animate('.5s ease-in-out',
+            style({ transform: 'scale(0)' })  // final
+        )
+    ])
+]);
