@@ -21,10 +21,8 @@ export class AppComponent implements OnInit {
     availableCountries: Country[];
     countries: Country[];
     selectedNames: Array<string>;
-    search = '';
 
-    constructor() {
-}
+    constructor() {}
 
     ngOnInit() {
         this.countries = COUNTRIES;
