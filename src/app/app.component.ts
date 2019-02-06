@@ -8,6 +8,8 @@ export interface Country {
     code: string;
     name: string;
 }
+const AllowMultiSelect = true;
+const InitialSelections = [];
 
 @Component({
     selector: 'app-root',
@@ -16,8 +18,7 @@ export interface Country {
     animations: [slideUpDown, disappear]
 })
 export class AppComponent implements OnInit {
-
-    selectedCountries = new SelectionModel<Country>(true, []);
+    selectedCountries = new SelectionModel<Country>(AllowMultiSelect, InitialSelections);
     availableCountries: Country[];
     countries: Country[];
     selectedNames: Array<string>;

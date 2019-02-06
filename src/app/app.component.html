@@ -11,11 +11,9 @@
                     <button (click)="selectAll();">All</button>
                     <button (click)="showMenu=false">Close</button>
                 </div>
-                <div>
-                    <form class="c-select__search" #searchform="ngForm">
-                        <input type="text" placeholder="Search" id="search" ngModel name="search">
-                    </form>
-                </div>
+                <form class="c-select__search" #searchform="ngForm">
+                    <input type="text" placeholder="Search" id="search" ngModel name="search">
+                </form>
                 <div class="c-select__items-wrapper">
                     <div class="c-select__selected" *ngIf="selectedCountries.hasValue()">
                         <div @disappear *ngFor="let item of selectedCountries.selected">
