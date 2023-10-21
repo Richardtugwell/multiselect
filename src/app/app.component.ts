@@ -9,7 +9,7 @@ export interface Country {
     name: string;
 }
 const AllowMultiSelect = true;
-const InitialSelections = [];
+const InitialSelections: Country[] = [];
 
 @Component({
     selector: 'app-root',
@@ -19,16 +19,17 @@ const InitialSelections = [];
 })
 export class AppComponent implements OnInit {
     selectedCountries = new SelectionModel<Country>(AllowMultiSelect, InitialSelections);
-    availableCountries: Country[];
-    countries: Country[];
-    selectedNames: Array<string>;
+    availableCountries: Country[] = [];
+    countries: Country[] = [];
+    selectedNames: Array<string> = [];
+    showMenu: Boolean = false
 
     constructor() {}
 
     ngOnInit() {
         this.countries = COUNTRIES;
         this.availableCountries = _.difference(this.countries, this.selectedCountries.selected);
-        this.selectedCountries.onChange.subscribe(() => {
+        this.selectedCountries.changed.subscribe(() => {
             this.selectedNames = this.selectedCountries.selected.map(item => item.name);
             this.availableCountries = _.difference(this.countries, this.selectedCountries.selected);
             // It shoudn't necessarily be the responsibility here to sort the selectionModel ....
