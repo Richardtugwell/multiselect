@@ -5,11 +5,13 @@ import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { FilterPipe } from './app.pipes';
+import { MultiselectComponent } from './components/multiselect/multiselect.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    FilterPipe
+    FilterPipe,
+    MultiselectComponent
   ],
   imports: [
     BrowserModule,
