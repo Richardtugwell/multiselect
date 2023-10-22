@@ -9,7 +9,7 @@ export class FilterPipe implements PipeTransform {
       const searchText = search.text.toLowerCase();
       return items.filter(it => {
           if (it.hasOwnProperty(search.field)) {
-              if (it[search.field].toString().toLowerCase().includes(searchText)) {
+              if (it[search.field].toString().toLowerCase().startsWith(searchText)) {
                   return true;
               } else return false
           } else return false
