@@ -1,39 +1,62 @@
 <div class="wrapper">
-    <div>
-        <div class="c-trigger" (click)="showMenu=!showMenu">
-            <span>Select Countries ({{selectedCountries.selected.length}})</span>
-            <i class="fas" [ngClass]="showMenu ? 'fa-chevron-up': 'fa-chevron-down'"> </i>
+  <div>
+    <div class="c-trigger" (click)="showMenu = !showMenu">
+      <span>Select Countries ({{ selectedCountries.selected.length }})</span>
+      <i class="fas" [ngClass]="showMenu ? 'fa-chevron-up' : 'fa-chevron-down'">
+      </i>
+    </div>
+    <div class="c-select">
+      <div class="c-select__wrapper" *ngIf="showMenu" @slideUpDown>
+        <div class="c-select__actions">
+          <button style="display:block" (click)="selectedCountries.clear()">None</button>
+          <button (click)="selectAll()">All</button>
         </div>
-        <div class="c-select">
-            <div class="c-select__wrapper" *ngIf="showMenu" @slideUpDown>
-                <div class="c-select__actions">
-                    <button (click)="selectedCountries.clear()">None</button>
-                    <button (click)="selectAll();">All</button>
-                    <button (click)="showMenu=false">Close</button>
-                </div>
-                <form class="c-select__search" #searchform="ngForm">
-                    <input type="text" placeholder="Search" id="search" ngModel name="search">
-                </form>
-                <div class="c-select__items-wrapper">
-                    <div class="c-select__selected" *ngIf="selectedCountries.hasValue()">
-                        <div @disappear *ngFor="let item of selectedCountries.selected">
-                            <span class="c-select__item far fa-check-square" (click)="selectedCountries.toggle(item)">
-                                {{item.name}}
-                            </span>
-                        </div>
-                    </div>
-                    <div @disappear *ngFor="let item of availableCountries | filter:{ field: 'name', text: searchform.value.search }">
-                        <span class="c-select__item far fa-square" (click)="selectedCountries.toggle(item)">
-                            {{item.name}}
-                        </span>
-                    </div>
-                </div>
+        <form class="c-select__search" #searchform="ngForm">
+          <input
+            type="text"
+            placeholder="Search"
+            id="search"
+            ngModel
+            name="search"
+          />
+        </form>
+        <div class="c-select__items-wrapper">
+          <div class="c-select__selected" *ngIf="selectedCountries.hasValue()">
+            <div @disappear *ngFor="let item of selectedCountries.selected">
+              <span
+                class="c-select__item far fa-check-square"
+                (click)="selectedCountries.toggle(item)"
+              >
+                {{ item.name }}
+              </span>
             </div>
+          </div>
+          <div
+            @disappear
+            *ngFor="
+              let item of availableCountries
+                | filter : { field: 'name', text: searchform.value.search }
+            "
+          >
+            <span
+              class="c-select__item far fa-square"
+              (click)="selectedCountries.toggle(item)"
+            >
+              {{ item.name }}
+            </span>
+          </div>
         </div>
+      </div>
     </div>
-    <div class="content-wrapper">
-        <div @disappear class="content-wrapper__item" *ngFor="let item of selectedCountries.selected" (click)="selectedCountries.deselect(item)">
-            {{item.name}} <i class="fa fa-trash"></i>
-        </div>
+  </div>
+  <div class="content-wrapper">
+    <div
+      @disappear
+      class="content-wrapper__item"
+      *ngFor="let item of selectedCountries.selected"
+      (click)="selectedCountries.deselect(item)"
+    >
+      {{ item.name }} <i class="fa fa-trash"></i>
     </div>
+  </div>
 </div>

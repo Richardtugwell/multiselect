@@ -23,9 +23,11 @@
         display: flex;
         width: 100%;
         & input {
-            flex: 1;
-            font-size:.8rem;
-            padding:.2rem;
+          border-radius: 5%;
+          border: 1px solid silver;
+          flex: 1;
+          font-size:.8rem;
+          padding:.2rem;
         }
     }
     &__actions {
@@ -33,9 +35,9 @@
         justify-content: space-between;
         margin-bottom: .2rem;
         & button {
-            flex: 0 0 30%;
+            flex: 1 ;
             background-color: transparent;
-            border-radius: 0;
+            border-radius: 5%;
             border: 1px solid silver;
             cursor: pointer;
             padding:.2rem;
