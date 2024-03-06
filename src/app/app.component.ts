@@ -9,7 +9,14 @@ import * as _ from "lodash";
   animations: [slideUpDown, disappear],
 })
 export class AppComponent implements OnInit {
+  selectedCountries: any
   constructor() {}
 
   ngOnInit() {}
+  
+  handleSelect(data: any) {
+    this.selectedCountries = data
+  }
+
+
 }

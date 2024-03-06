@@ -1,15 +1,14 @@
 <div class="wrapper">
   <div>
-    <app-multiselect></app-multiselect>
+    <app-multiselect (change)="handleSelect($event)"></app-multiselect>
   </div>
   <div class="content-wrapper">
-    <!-- <div
+    <div
       @disappear
       class="content-wrapper__item"
-      *ngFor="let item of selectedCountries.selected"
-      (click)="selectedCountries.deselect(item)"
+      *ngFor="let item of selectedCountries"
     >
-      {{ item.name }} <i class="fa fa-trash"></i>
-    </div> -->
+      {{ item.name }}
+    </div>
   </div>
 </div>

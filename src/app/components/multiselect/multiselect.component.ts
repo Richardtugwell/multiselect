@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Output, EventEmitter, OnInit } from '@angular/core';
 import { SelectionModel } from "@angular/cdk/collections";
 import { slideUpDown, disappear } from "../../app.animations";
 import { COUNTRIES } from "../../app.countries";
@@ -18,6 +18,8 @@ const InitialSelections: Country[] = [];
   animations: [slideUpDown, disappear],
 })
 export class MultiselectComponent implements OnInit {
+  @Output() change: EventEmitter<any> = new EventEmitter();
+
   selectedCountries = new SelectionModel<Country>(
     AllowMultiSelect,
     InitialSelections
@@ -45,6 +47,7 @@ export class MultiselectComponent implements OnInit {
       );
       // It shoudn't necessarily be the responsibility here to sort the selectionModel ....
       this.selectedCountries.sort(this.sortByName);
+      this.change.emit(this.selectedCountries.selected)
     });
   }
 
